@@ -25,12 +25,12 @@ Open `index.html` in any modern browser. That's it — there's nothing to instal
 | Left drag | Paint / draw / erase (active tool) |
 | Right drag | Erase |
 | Middle drag or Shift+drag | Pan |
-| Ctrl+wheel | Zoom at cursor |
+| `Ctrl`+wheel | Zoom at cursor |
 | `+` / `-` | Zoom in/out around board center |
 | `0` | Reset zoom to 100% |
 | Arrow keys | Pan |
 | Space | Play / pause |
-| Esc | Disarm pattern placement |
+| `Esc` | Disarm pattern placement |
 
 ## Project layout
 
