@@ -22,14 +22,15 @@ The design motto: **"It is math, not gloomy shit."** Cells are flat, crisp block
 
 | Concern | Choice |
 | --- | --- |
-| Language | Vanilla JS (ES2020+), single `<script>` block |
+| Framework | Next.js 15 (App Router) + React 19, TypeScript for app code; game engine is plain JS in a client component |
+| Package manager | Bun (`bun install`, `bun run dev`, `bun run build`) |
 | Rendering | 2D `CanvasRenderingContext2D` on a single `<canvas>`, plus a cached offscreen background canvas (`bgCanvas`) that is re-painted only on resize |
-| Styling | Inline CSS in a `<style>` block, CSS custom properties in `:root` |
-| State | In-memory typed arrays — `Uint8Array` grid + `Uint16Array` ages |
+| Styling | Single global stylesheet `app/globals.css`, CSS custom properties in `:root` |
+| State | In-memory typed arrays — `Uint8Array` grid + `Uint16Array` ages (engine unchanged from the original single-file version) |
 | Persistence | `localStorage` keys `rgolee_first_visit` and `rgolee_strobe_warned` |
-| Enumeration | N/A (no modules, no imports, no framework) |
+| Deployment | Vercel-ready zero-config; set `NEXT_PUBLIC_SITE_URL` if the final domain differs from the default |
 
-The sim loop is a `requestAnimationFrame` fixed-timestep accumulator (`acc` vs. `interval = 1/gps`) with a guard so it never spirals after a tab pause.
+The sim loop is a `requestAnimationFrame` fixed-timestep accumulator (`acc` vs. `interval = 1/gps`) with a guard so it never spirals after a tab pause. The engine lives inside a `useEffect` in `components/game-app.jsx` and cleans up its listeners (AbortController) and animation frame on unmount.
 
 ---
 
@@ -207,8 +208,10 @@ The sim seeds a random 22% soup and auto-starts only on the very first visit; re
 ## 9. Accessibility & SEO
 
 - Semantic landmarks (`header`, `main`, `aside`, `h1`), labelled controls (`aria-label` on the slider and canvas), and a keyboard path for every mouse action.
-- Full meta set: description, Open Graph, Twitter card, and JSON-LD `WebApplication` schema for discoverability.
-- The favicon is a small inline SVG tile of the logo's live cells — no extra asset fetch.
+- Next.js Metadata API: keyword-rich title/description, canonical URL, Open Graph, Twitter card, robots directives, `theme-color`.
+- JSON-LD `WebApplication` schema (author, free offer, genre) in `app/layout.tsx`.
+- A crawlable "About / FAQ" content section (`components/about-section.tsx`) renders below the app fold — question-form headings with direct answers, since the board itself is canvas-only.
+- Generated assets: `app/opengraph-image.tsx` (1200×630 PNG), `app/robots.ts`, `app/sitemap.ts`. Set `NEXT_PUBLIC_SITE_URL` to the production domain.
 
 ---
 
@@ -216,12 +219,22 @@ The sim seeds a random 22% soup and auto-starts only on the very first visit; re
 
 ```
 R-GoL-EE/
-└── index.html      single file — structure, styles, logic — no separate assets
-└── design.md       this document
+├── app/
+│   ├── layout.tsx            metadata, JSON-LD, root shell
+│   ├── page.tsx              GameApp + AboutSection
+│   ├── globals.css           all styles (theme + game + about section)
+│   ├── opengraph-image.tsx   generated 1200×630 OG image
+│   ├── robots.ts             robots.txt
+│   └── sitemap.ts            sitemap.xml
+├── components/
+│   ├── game-app.jsx          client component — markup + full sim engine
+│   └── about-section.tsx     crawlable Q&A content + footer
+├── design.md                 this document
+└── README.md
 ```
 
 **Golden rules for future edits:**
 1. Cells stay flat and solid — never add glow/bloom to the board itself.
 2. Keep the lifecycle palette and duration constants the single source of truth for color logic and the legend.
 3. Preserve the camera model — center-on-zoom and center-on-shrink are deliberate.
-4. One file, no build step, no runtime network dependencies.
+4. The engine in `components/game-app.jsx` is a direct port of the original single-file version — keep it imperative and framework-free inside its `useEffect`.
