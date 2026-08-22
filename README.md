@@ -2,7 +2,7 @@
 
 **Rahan's Game of Life, Extended Edition** is a free, open-source **Conway's Game of Life simulator** built with **Next.js 15, React 19, and Bun**. A neon cellular automata playground with color-aging cells, editable B/S rules, and a fully pannable, zoomable canvas — deployed serverless-ready on Vercel.
 
-> *"It is math, not gloomy shit."* — flat, crisp neon cells on a dark synthwave board. No glow pass, no fake bloom.
+> *"Simple rules, infinite consequences."* — flat, crisp neon cells on a dark synthwave board. No glow pass, no fake bloom.
 
 ![Next.js](https://img.shields.io/badge/next.js-15-black?logo=next.js) 
 ![React](https://img.shields.io/badge/react-19-61dafb?logo=react&logoColor=white)
