@@ -5,10 +5,15 @@
 > *"It is math, not gloomy shit."* — flat, crisp neon cells on a dark synthwave board. No glow pass, no fake bloom.
 
 ![JavaScript](https://img.shields.io/badge/javascript-vanilla%20ES2020%2B-f7df1e?logo=javascript&logoColor=black)
+
 ![Dependencies](https://img.shields.io/badge/dependencies-none-brightgreen)
+
 ![Build step](https://img.shields.io/badge/build-none-brightgreen)
+
 ![Files](https://img.shields.io/badge/codebase-single%20index.html-blue)
+
 ![Topic](https://img.shields.io/badge/topic-conway's%20game%20of%20life-38bdf8)
+
 ![Topic](https://img.shields.io/badge/topic-cellular%20automata-a855f7)
 
 ## Why R-GoL-EE?
