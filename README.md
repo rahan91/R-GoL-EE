@@ -2,7 +2,7 @@
 
 **Rahan's Game of Life, Extended Edition** is a free, open-source **Conway's Game of Life simulator** built with **Next.js 15, React 19, and Bun**. A neon cellular automata playground with color-aging cells, editable B/S rules, and a fully pannable, zoomable canvas — deployed serverless-ready on Vercel.
 
-> *"Simple rules, infinite consequences."* — flat, crisp neon cells on a dark synthwave board. No glow pass, no fake bloom.
+> *"Flat cells, deep universe."* — flat, crisp neon cells on a dark synthwave board. No glow pass, no fake bloom.
 
 ![Next.js](https://img.shields.io/badge/next.js-15-black?logo=next.js) 
 ![React](https://img.shields.io/badge/react-19-61dafb?logo=react&logoColor=white)
@@ -21,8 +21,8 @@ Most Game of Life web apps hide their cells' history and lock you into one rule 
 - **Visible cell aging** — every surviving cell travels through the color spectrum: blue → green → yellow → orange → red → purple → white over 180 generations. Population age is readable at a glance.
 - **Any B/S rule** — type any outer-totalistic birth/survive rule (B3/S23, B36/S23 HighLife, B/S without numbers for Seeds-style worlds...) with 23 curated rule presets included.
 - **A canvas, not a form** — paint, erase, pan and zoom the board directly like an image editor. Zoom anywhere from 20% to 800%, at cursor or board center.
-- **26 pattern modules** — still lifes, oscillators, spaceships, guns and methuselahs with live previews; click to drop gliders, Gosper guns, R-pentominoes and more.
-- **Self-aware simulation** — FNV-1a grid hashing detects extinction and stability automatically: the sim pauses itself and announces still lifes and period 2–128 oscillators.
+- **44 pattern modules** — still lifes, oscillators, spaceships, guns and methuselahs with live previews; click to drop gliders, Gosper guns, R-pentominoes and more.
+- **Self-aware simulation** — dual FNV-1a grid hashing detects extinction and stability automatically: the sim pauses itself and announces still lifes, period oscillators, and travelling loops (spaceship streams on a wrapped board) up to period 1024.
 - **Accessible & fast** — full keyboard control, ARIA-labelled controls, semantic HTML5 landmarks, typed-array grids (`Uint8Array` + `Uint16Array`), fixed-timestep `requestAnimationFrame` loop.
 - **SEO/AEO-ready** — Metadata API with canonical URLs, Open Graph + Twitter cards, generated OG image, JSON-LD `WebApplication` schema, `robots.txt`, `sitemap.xml`, and a crawlable FAQ section under the app.
 

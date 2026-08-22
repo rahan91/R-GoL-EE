@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title:
     "R-GoL-EE — Free Online Conway's Game of Life Simulator (Custom B/S Rules)",
   description:
-    "Play Conway's Game of Life free in your browser. Neon cells that age through the color spectrum, editable B/S rules with 23 presets, 26 pattern modules, and a pannable zoomable canvas. No install, no ads.",
+    "Play Conway's Game of Life free in your browser. Neon cells that age through the color spectrum, editable B/S rules with 23 presets, 44 pattern modules, and a pannable zoomable canvas. No install, no ads.",
   keywords: [
     "game of life",
     "conway's game of life",
@@ -31,14 +31,14 @@ export const metadata: Metadata = {
     siteName: "R-GoL-EE",
     title: "R-GoL-EE — Conway's Game of Life Simulator",
     description:
-      "A neon Conway's Game of Life with color-aging cells, any B/S rule, and 26 pattern modules. Runs in your browser — nothing to install.",
+      "A neon Conway's Game of Life with color-aging cells, any B/S rule, and 44 pattern modules. Runs in your browser — nothing to install.",
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
     title: "R-GoL-EE — Conway's Game of Life Simulator",
     description:
-      "A neon Conway's Game of Life with color-aging cells, any B/S rule, and 26 pattern modules.",
+      "A neon Conway's Game of Life with color-aging cells, any B/S rule, and 44 pattern modules.",
   },
   robots: {
     index: true,
@@ -65,7 +65,7 @@ const jsonLd = {
   operatingSystem: "Any (web browser)",
   browserRequirements: "Requires JavaScript",
   description:
-    "Free online Conway's Game of Life simulator with color-aging cells, editable B/S rules, 23 rule presets, 26 pattern modules, and auto-pause stability detection.",
+    "Free online Conway's Game of Life simulator with color-aging cells, editable B/S rules, 23 rule presets, 44 pattern modules, and auto-pause stability detection.",
   genre: ["Simulation", "Educational", "Puzzle"],
   author: { "@type": "Person", name: "Rahan", url: "https://github.com/rahan91" },
   offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },

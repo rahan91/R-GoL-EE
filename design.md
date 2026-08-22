@@ -175,14 +175,14 @@ The cursor stays neutral (`default`) — panning is indicated by the movement on
 
 ### 7.1 Modules
 
-26 patterns in four categories (Still Lifes, Oscillators, Spaceships, Guns, Methuselahs) are stored as coordinate lists and rendered into tiny canvas previews ("chips"). Selecting a chip arms placement; clicking the board drops the pattern centered on the cursor; pressing **Esc** or clicking the chip again disarms it. **Starting the sim always exits placement mode.**
+44 patterns in five categories (Still Lifes, Oscillators, Spaceships, Guns, Methuselahs) are stored as coordinate lists and rendered into tiny canvas previews ("chips"). Selecting a chip arms placement; clicking the board drops the pattern centered on the cursor; pressing **Esc** or clicking the chip again disarms it. **Starting the sim always exits placement mode.**
 
 ### 7.2 Auto-pause ("stop detection")
 
-The sim watches itself: on every step it hashes the full grid (FNV-1a over the flattened position set) and keeps a small ring of recent hashes.
+The sim watches itself: on every step it hashes the full grid with **two independent FNV-1a hashes** (different seeds/primes) plus population and summed cell coordinates, and keeps a ring buffer of recent states (up to period 1024).
 
 - Population hits 0 → **Extinct** banner.
-- A hash repeats → **stable still life** (period 1) or a **period-2..128 loop** banner.
+- A state matches itself three generations apart (current, p back, 2p back) on **both** hashes and population → **stable still life** (period 1), a **period-N oscillator**, or a **travelling loop** (spaceship stream on a wrapped board, classified by its per-period centroid drift).
 - The generation counter freezes with the banner.
 
 **Resume rule:** once the sim has auto-paused, pressing play resumes it and it will **not** re-pause on the same loop — auto-stop stays disabled until the board is actually changed (paint, clear, randomize, module drop, rule edit, or resize). Intentional: continuing after a "settled" state means "let it keep running."

@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 
 const MODULE_DATA = [
+  /* ---------- Still Lifes ---------- */
   ["Still Lifes", "Block", ["OO", "OO"]],
   ["Still Lifes", "Beehive", [".OO.", "O..O", ".OO."]],
   ["Still Lifes", "Loaf", [".OO.", "O..O", ".O.O", "..O."]],
@@ -10,9 +11,10 @@ const MODULE_DATA = [
   ["Still Lifes", "Ship", ["OO..", "O.O.", ".OO."]],
   ["Still Lifes", "Tub", [".O.", "O.O", ".O."]],
   ["Still Lifes", "Pond", [".OO.", "O..O", "O..O", ".OO."]],
-  ["Still Lifes", "Long Boat", [".OO", "O.O", ".O.", ".O."]],
   ["Still Lifes", "Eater 1", [".OO..", "O..O.", ".O.O.", "..O.."]],
-  ["Still Lifes", "Ring", [".OO.", "O..O", "O..O", ".OO."]],
+  ["Still Lifes", "Barge", ["OO..", "O.O.", ".O.O", "..OO"]],
+  ["Still Lifes", "Long Barge", ["OO...", "O.O..", ".O.O.", "..O.O", "...OO"]],
+  /* ---------- Oscillators ---------- */
   ["Oscillators", "Blinker", ["OOO"]],
   ["Oscillators", "Toad", [".OOO", "OOO."]],
   ["Oscillators", "Beacon", ["OO..", "OO..", "..OO", "..OO"]],
@@ -63,10 +65,27 @@ const MODULE_DATA = [
       "....OO......",
     ],
   ],
+  ["Oscillators", "Pulse p2 · 1", ["OO", ".O"]],
+  ["Oscillators", "Pulse p2 · 2", ["O.O", ".O.", ".O."]],
+  ["Oscillators", "Pulse p2 · 3", ["O..", "OO.", "O.."]],
+  ["Oscillators", "Pulse p2 · 4", ["O..", ".OO", "O.."]],
+  ["Oscillators", "Pulse p3 · 1", ["OOO.", "O..O", ".OO.", "O..."]],
+  ["Oscillators", "Pulse p3 · 2", ["OOO.", "O..O", ".O..", ".OO."]],
+  ["Oscillators", "Pulse p3 · 3", ["OO.O", "O.O.", "O.O.", ".O.."]],
+  ["Oscillators", "Pulse p4 · 1", ["OOO", "O..", ".O."]],
+  ["Oscillators", "Pulse p4 · 2", ["OO.", "O.O", "O.."]],
+  ["Oscillators", "Pulse p4 · 3", ["OO.", ".OO", "O.."]],
+  ["Oscillators", "Pulse p4 · 4", ["OO.", "..O", ".O."]],
+  /* ---------- Spaceships ---------- */
   ["Spaceships", "Glider", [".O.", "..O", "OOO"]],
   ["Spaceships", "LWSS", [".O..O", "O....", "O...O", "OOOO."]],
   ["Spaceships", "MWSS", ["...O..", ".O...O", "O.....", "O....O", "OOOOO."]],
   ["Spaceships", "HWSS", ["...OO..", ".O....O", "O......", "O.....O", "OOOOOO."]],
+  ["Spaceships", "Glider Fleet", [".O...........O...........O.", "..O...........O...........O", "OOO.........OOO.........OOO"]],
+  ["Spaceships", "LWSS Pair", [".O..O", "O....", "O...O", "OOOO.", ".....", ".....", ".....", ".....", ".O..O", "O....", "O...O", "OOOO."]],
+  ["Spaceships", "MWSS Pair", ["...O..", ".O...O", "O.....", "O....O", "OOOOO.", "......", "......", "......", "......", "...O..", ".O...O", "O.....", "O....O", "OOOOO."]],
+  ["Spaceships", "HWSS Pair", ["...OO..", ".O....O", "O......", "O.....O", "OOOOOO.", ".......", ".......", ".......", ".......", ".......", "...OO..", ".O....O", "O......", "O.....O", "OOOOOO."]],
+  /* ---------- Guns ---------- */
   [
     "Guns",
     "Gosper Glider Gun",
@@ -82,10 +101,14 @@ const MODULE_DATA = [
       "............OO......................",
     ],
   ],
+  /* ---------- Methuselahs ---------- */
   ["Methuselahs", "R-pentomino", [".OO", "OO.", ".O."]],
   ["Methuselahs", "Diehard", ["......O.", "OO.......", ".O...OOO"]],
   ["Methuselahs", "Acorn", [".O.....", "...O...", "OO..OOO"]],
   ["Methuselahs", "B-heptomino", ["O.OO", "OOO.", ".O.."]],
+  ["Methuselahs", "Herschel", ["OOO", "O.O", "O..", "O.."]],
+  ["Methuselahs", "Thunderbird", ["OOO", ".O.", ".O."]],
+  ["Methuselahs", "Pi-heptomino", ["OOO", ".O.", ".O."]],
 ];
 
 const PRESETS = [
@@ -151,6 +174,8 @@ export default function GameApp() {
       dpr = 1;
     let grid = null,
       ages = null;
+    let g2 = null,
+      a2 = null;
     let gen = 0,
       pop = 0;
     let running = true,
@@ -205,6 +230,8 @@ export default function GameApp() {
       rows = Math.max(16, Math.ceil(canvasH / 9) + 1);
       grid = new Uint8Array(cols * rows);
       ages = new Uint16Array(cols * rows);
+      g2 = new Uint8Array(cols * rows);
+      a2 = new Uint16Array(cols * rows);
       if (oldGrid && oldCols) {
         const rr = Math.min(Math.floor(oldGrid.length / oldCols), rows);
         for (let r = 0; r < rr; r++) {
@@ -252,6 +279,8 @@ export default function GameApp() {
       rows = y;
       grid = new Uint8Array(cols * rows);
       ages = new Uint16Array(cols * rows);
+      g2 = new Uint8Array(cols * rows);
+      a2 = new Uint16Array(cols * rows);
       recalcCanvas();
       if (autoFit) fitBoard();
       buildVignette();
@@ -314,29 +343,86 @@ export default function GameApp() {
       return n;
     }
 
-    const MAX_PERIOD = 128;
-    const history = [];
+    const MAX_PERIOD = 1024;
+    // Ring buffer of recent world states. Each entry stores two independent
+    // FNV-1a hashes (different seeds) plus population and the summed cell
+    // coordinates (used to detect travelling loops / spaceships).
+    const RING = MAX_PERIOD * 3 + 8;
+    const ringH1 = new Uint32Array(RING);
+    const ringH2 = new Uint32Array(RING);
+    const ringPop = new Uint32Array(RING);
+    const ringSx = new Float64Array(RING);
+    const ringSy = new Float64Array(RING);
+    let ringHead = 0;
+    let ringLen = 0;
 
     function hashGrid() {
-      let h = 2166136261 >>> 0;
+      let h1 = 2166136261 >>> 0; // FNV-1a
+      let h2 = 40503 >>> 0; // second independent hash (different seed/prime)
+      let pop = 0;
+      let sx = 0,
+        sy = 0;
       for (let i = 0; i < grid.length; i++) {
         if (grid[i]) {
-          h ^= i;
-          h = Math.imul(h, 16777619) >>> 0;
+          h1 ^= i + 1;
+          h1 = Math.imul(h1, 16777619) >>> 0;
+          h2 ^= i + 1;
+          h2 = Math.imul(h2, 2097169) >>> 0;
+          pop++;
+          const r = (i / cols) | 0;
+          const c = i - r * cols;
+          sx += r + c;
+          sy += r - c;
         }
       }
-      return h;
+      return { h1: h1 >>> 0, h2: h2 >>> 0, pop, sx, sy };
     }
 
-    function detectCycle(h) {
-      history.push(h);
-      if (history.length > MAX_PERIOD * 2 + 2) history.shift();
-      const n = history.length;
+    function pushState(s) {
+      ringH1[ringHead] = s.h1;
+      ringH2[ringHead] = s.h2;
+      ringPop[ringHead] = s.pop;
+      ringSx[ringHead] = s.sx;
+      ringSy[ringHead] = s.sy;
+      ringHead = (ringHead + 1) % RING;
+      if (ringLen < RING) ringLen++;
+      else ringLen = RING; // full -> stop growing, slot reuse wraps
+    }
+
+    function at(back) {
+      // back = 0 is most recent, back = 1 is previous, etc.
+      const idx = (ringHead - 1 - back + RING) % RING;
+      return {
+        h1: ringH1[idx],
+        h2: ringH2[idx],
+        pop: ringPop[idx],
+        sx: ringSx[idx],
+        sy: ringSy[idx],
+      };
+    }
+
+    function detectCycle() {
+      const s = hashGrid();
+      pushState(s);
+      if (ringLen < 3) return 0;
+      const n = ringLen;
+      // Walk the ring for the smallest period whose world state is confirmed
+      // THREE generations apart (current, p back, 2p back) on BOTH independent
+      // hashes AND population. Triple-collision + dual-hash makes accidental
+      // matches from hash collisions effectively impossible, so even very long
+      // or drifting loops (spaceships cycling on a toroidal board) are caught.
       for (let p = 1; p <= MAX_PERIOD && p < n; p++) {
-        if (n - 1 - p < 0) continue;
+        if (2 * p >= n) break;
+        const a = at(0);
+        const b = at(p);
+        const c = at(2 * p);
         if (
-          history[n - 1] === history[n - 1 - p] &&
-          history[n - 2] === history[n - 2 - p]
+          a.h1 === b.h1 &&
+          a.h2 === b.h2 &&
+          b.h1 === c.h1 &&
+          b.h2 === c.h2 &&
+          a.pop === b.pop &&
+          b.pop === c.pop
         ) {
           return p;
         }
@@ -344,8 +430,21 @@ export default function GameApp() {
       return 0;
     }
 
+    // Per-period centroid drift; distinguishes oscillators (no drift) from
+    // travelling loops such as spaceships cycling on a wrapped/toroidal board.
+    function driftForPeriod(p) {
+      const a = at(0);
+      const b = at(p);
+      const dx = a.sx - b.sx;
+      const dy = a.sy - b.sy;
+      const drow = (dx + dy) / 2;
+      const dcol = (dx - dy) / 2;
+      return { drow: Math.round(drow / p), dcol: Math.round(dcol / p) };
+    }
+
     function gridEdited() {
-      history.length = 0;
+      ringLen = 0;
+      ringHead = 0;
       $("stopBanner").classList.remove("show");
       autoStopDisabled = false;
     }
@@ -356,11 +455,27 @@ export default function GameApp() {
         stopForReason("fully extinct — no cells remain");
         return;
       }
-      const p = detectCycle(hashGrid());
+      const p = detectCycle();
       if (p) {
-        stopForReason(
-          p === 1 ? "stable still life reached" : "period " + p + " loop detected"
-        );
+        let msg;
+        if (p === 1) {
+          msg = "stable still life reached";
+        } else {
+          const d = driftForPeriod(p);
+          if (d.drow === 0 && d.dcol === 0) {
+            msg = "period " + p + " oscillator loop detected";
+          } else {
+            msg =
+              "period " +
+              p +
+              " travelling loop detected (spaceship stream, drift " +
+              d.drow +
+              "," +
+              d.dcol +
+              ")";
+          }
+        }
+        stopForReason(msg);
       }
     }
 
@@ -373,8 +488,8 @@ export default function GameApp() {
     }
 
     function step() {
-      const next = new Uint8Array(cols * rows);
-      const nextAges = new Uint16Array(cols * rows);
+      const next = g2;
+      const nextAges = a2;
       for (let r = 0; r < rows; r++) {
         for (let c = 0; c < cols; c++) {
           const i = r * cols + c;
@@ -383,17 +498,27 @@ export default function GameApp() {
             if (survSet.has(n)) {
               next[i] = 1;
               nextAges[i] = ages[i] + 1;
+            } else {
+              next[i] = 0;
             }
           } else {
             if (birthSet.has(n)) {
               next[i] = 1;
               nextAges[i] = 0;
+            } else {
+              next[i] = 0;
             }
           }
         }
       }
+      // ping-pong: the buffer we just wrote becomes the live grid, and the
+      // old live grid becomes next step's scratch (no per-step allocation).
+      const oldG = grid,
+        oldA = ages;
       grid = next;
       ages = nextAges;
+      g2 = oldG;
+      a2 = oldA;
       gen++;
       updateStats();
       checkStop();
@@ -409,6 +534,8 @@ export default function GameApp() {
       for (let i = 0; i < grid.length; i++) {
         grid[i] = Math.random() < d ? 1 : 0;
         ages[i] = 0;
+        g2[i] = 0;
+        a2[i] = 0;
       }
       gen = 0;
       gridEdited();
@@ -418,6 +545,8 @@ export default function GameApp() {
     function clearAll() {
       grid.fill(0);
       ages.fill(0);
+      g2.fill(0);
+      a2.fill(0);
       gen = 0;
       gridEdited();
       updateStats();
@@ -802,7 +931,11 @@ export default function GameApp() {
       $("iconPause").style.display = run ? "block" : "none";
       $("btnPlayLabel").textContent = run ? "Pause" : "Play";
       if (run) {
-        history.length = 0;
+        // Drop any accumulated frame time so resuming never fires a burst of
+        // catch-up generations that would make the counter jump.
+        acc = 0;
+        ringLen = 0;
+        ringHead = 0;
         $("stopBanner").classList.remove("show");
       }
     }

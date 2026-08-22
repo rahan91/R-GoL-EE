@@ -2,7 +2,7 @@
   "name": "r-gol-ee",
   "version": "1.0.0",
   "private": true,
-  "description": "Rahan's Game of Life, Extended Edition - a neon Conway's Game of Life simulator with color-aging cells, custom B/S rules, and 26 pattern modules.",
+  "description": "Rahan's Game of Life, Extended Edition - a neon Conway's Game of Life simulator with color-aging cells, custom B/S rules, and 44 pattern modules.",
   "scripts": {
     "dev": "next dev -p 3232",
     "build": "next build",
