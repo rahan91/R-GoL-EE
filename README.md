@@ -12,8 +12,7 @@
 
 ![Files](https://img.shields.io/badge/codebase-single%20index.html-blue)
 
-![Topic](https://img.shields.io/badge/topic-conway's%20game%20of%20life-38bdf8)
-
+![Topic](https://img.shields.io/badge/topic-conway's%20game%20of%20life-38bdf8) 
 ![Topic](https://img.shields.io/badge/topic-cellular%20automata-a855f7)
 
 ## Why R-GoL-EE?
