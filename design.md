@@ -23,7 +23,7 @@ The design motto: **"It is math, not gloomy shit."** Cells are flat, crisp block
 | Concern | Choice |
 | --- | --- |
 | Framework | Next.js 15 (App Router) + React 19, TypeScript for app code; game engine is plain JS in a client component |
-| Package manager | Bun (`bun install`, `bun run dev`, `bun run build`) |
+| Package manager | pnpm (`pnpm install`, `pnpm run dev`, `pnpm run build`) |
 | Rendering | 2D `CanvasRenderingContext2D` on a single `<canvas>`, plus a cached offscreen background canvas (`bgCanvas`) that is re-painted only on resize |
 | Styling | Single global stylesheet `app/globals.css`, CSS custom properties in `:root` |
 | State | In-memory typed arrays — `Uint8Array` grid + `Uint16Array` ages (engine unchanged from the original single-file version) |
@@ -111,12 +111,12 @@ Newborn cells are born blue and spend one generation at age 0. Every generation 
 
 | Stage | From → To | Duration (gens) | Share of 180 | Feel |
 | --- | --- | --- | --- | --- |
-| 1 | `#3b82f6` blue → `#22c55e` green | 4 | 2.2% | fast |
-| 2 | `#22c55e` green → `#facc15` yellow | 30 | 16.7% | slow |
-| 3 | `#facc15` yellow → `#f97316` orange | 8 | 4.4% | slightly fast |
-| 4 | `#f97316` orange → `#ef4444` red | 18 | 10.0% | slightly slow |
-| 5 | `#ef4444` red → `#a855f7` purple | 40 | 22.2% | slow |
-| 6 | `#a855f7` purple → `#ffffff` white | 80 | 44.4% | very slow |
+| 1 | `#3b82f6` blue → `#22c55e` green | 6 | 3.3% | fast |
+| 2 | `#22c55e` green → `#facc15` yellow | 24 | 13.3% | moderate |
+| 3 | `#facc15` yellow → `#f97316` orange | 14 | 7.8% | slow |
+| 4 | `#f97316` orange → `#ef4444` red | 34 | 18.9% | very slow |
+| 5 | `#ef4444` red → `#a855f7` purple | 40 | 22.2% | very slow |
+| 6 | `#a855f7` purple → `#ffffff` white | 62 | 34.4% | steady |
 
 - A cell that lives exactly 180 generations ends at pure white; any older cell is clamped to white.
 - `colorForAge(age)` walks the stages, subtracts completed durations from the running total, and linearly interpolates RGB to the stage's `to` color at fraction `remaining/duration`. The result is three rounded channels, returned as an `[r, g, b]` array for direct canvas fill styling.
@@ -126,8 +126,8 @@ Newborn cells are born blue and spend one generation at age 0. Every generation 
 The legend bar in the sidebar is a single `linear-gradient` whose stops are the exact cumulative bounds of the stages (each ÷ 180):
 
 ```
-#3b82f6 0%, #22c55e 2.22%, #facc15 18.89%, #f97316 23.33%,
-#ef4444 33.33%, #a855f7 55.56%, #ffffff 100%
+#3b82f6 0%, #22c55e 3.33%, #facc15 16.67%, #f97316 24.44%,
+#ef4444 43.33%, #a855f7 65.56%, #ffffff 100%
 ```
 
 So the bar is a pixel-accurate mirror of cell aging: each color dominates exactly its generation share and fades into the next across its own span, ending in white. Transparent flex-weight spans sit on top purely to give each zone a hover tooltip ("Blue → Green · fast", etc.).

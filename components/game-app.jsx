@@ -160,12 +160,12 @@ export default function GameApp() {
     const AREA_PAD = 10;
 
     const STAGES = [
-      { f: [59, 130, 246], t: [34, 197, 94], dur: 4 },
-      { f: [34, 197, 94], t: [250, 204, 21], dur: 30 },
-      { f: [250, 204, 21], t: [249, 115, 22], dur: 8 },
-      { f: [249, 115, 22], t: [239, 68, 68], dur: 18 },
+      { f: [59, 130, 246], t: [34, 197, 94], dur: 6 },
+      { f: [34, 197, 94], t: [250, 204, 21], dur: 24 },
+      { f: [250, 204, 21], t: [249, 115, 22], dur: 14 },
+      { f: [249, 115, 22], t: [239, 68, 68], dur: 34 },
       { f: [239, 68, 68], t: [168, 85, 247], dur: 40 },
-      { f: [168, 85, 247], t: [255, 255, 255], dur: 80 },
+      { f: [168, 85, 247], t: [255, 255, 255], dur: 62 },
     ];
 
     let cols = 0,
@@ -1471,17 +1471,17 @@ export default function GameApp() {
               id="legendBar"
               style={{
                 background:
-                  "linear-gradient(to right, #3b82f6 0%, #22c55e 2.22%, #facc15 18.89%, #f97316 23.33%, #ef4444 33.33%, #a855f7 55.56%, #ffffff 100%)",
+                  "linear-gradient(to right, #3b82f6 0%, #22c55e 3.33%, #facc15 16.67%, #f97316 24.44%, #ef4444 43.33%, #a855f7 65.56%, #ffffff 100%)",
               }}
             >
-              <span style={{ flex: 4 }} title="Blue → Green · fast" />
-              <span style={{ flex: 30 }} title="Green → Yellow · slow" />
-              <span style={{ flex: 8 }} title="Yellow → Orange · slightly fast" />
-              <span style={{ flex: 18 }} title="Orange → Red · slightly slow" />
-              <span style={{ flex: 40 }} title="Red → Purple · slow" />
-              <span style={{ flex: 80 }} title="Purple → White · very slow" />
+              <span style={{ flex: 6 }} title="Blue → Green · fast" />
+              <span style={{ flex: 24 }} title="Green → Yellow · moderate" />
+              <span style={{ flex: 14 }} title="Yellow → Orange · slow" />
+              <span style={{ flex: 34 }} title="Orange → Red · very slow" />
+              <span style={{ flex: 40 }} title="Red → Purple · very slow" />
+              <span style={{ flex: 62 }} title="Purple → White · steady" />
             </div>
-            <p className="legend-note">Cells age through the spectrum every generation they survive — <b style={{ color: "#60a5fa" }}>Blue</b>&#8594;<b style={{ color: "#4ade80" }}>Green</b> is quick, while the final <b style={{ color: "#c084fc" }}>Purple</b>&#8594;<b style={{ color: "#fff" }}>White</b> crawl takes 80 generations. Pure white = 180 generations old.</p>
+            <p className="legend-note">Cells age through the spectrum every generation they survive — <b style={{ color: "#60a5fa" }}>Blue</b>&#8594;<b style={{ color: "#4ade80" }}>Green</b> flashes by in 6 generations, then the board dwells on <b style={{ color: "#fb923c" }}>Orange</b> (34 gens) and <b style={{ color: "#f87171" }}>Red</b> (40 gens) before the final <b style={{ color: "#c084fc" }}>Purple</b>&#8594;<b style={{ color: "#fff" }}>White</b> crawl. Pure white = 180 generations old.</p>
           </div>
 
           <div className="card glass">

@@ -1,13 +1,13 @@
 # R-GoL-EE — Conway's Game of Life Simulator (Next.js)
 
-**Rahan's Game of Life, Extended Edition** is a free, open-source **Conway's Game of Life simulator** built with **Next.js 15, React 19, and Bun**. A neon cellular automata playground with color-aging cells, editable B/S rules, and a fully pannable, zoomable canvas — deployed serverless-ready on Vercel.
+**Rahan's Game of Life, Extended Edition** is a free, open-source **Conway's Game of Life simulator** built with **Next.js 15, React 19, and pnpm**. A neon cellular automata playground with color-aging cells, editable B/S rules, and a fully pannable, zoomable canvas — deployed serverless-ready on Vercel.
 
 > *"Flat cells, deep universe."* — flat, crisp neon cells on a dark synthwave board. No glow pass, no fake bloom.
 
 ![Next.js](https://img.shields.io/badge/next.js-15-black?logo=next.js) 
 ![React](https://img.shields.io/badge/react-19-61dafb?logo=react&logoColor=white)
 
-![Bun](https://img.shields.io/badge/bun-package%20manager-fbf0df?logo=bun)
+![pnpm](https://img.shields.io/badge/pnpm-package%20manager-f69220?logo=pnpm&logoColor=white)
 
 ![Vercel](https://img.shields.io/badge/deploy-vercel--ready-black?logo=vercel)
 
@@ -28,13 +28,13 @@ Most Game of Life web apps hide their cells' history and lock you into one rule 
 
 ## Quick Start
 
-Requires [Bun](https://bun.sh).
+Requires [Node.js](https://nodejs.org) 18.18+ and [pnpm](https://pnpm.io).
 
 ```bash
 git clone https://github.com/rahan91/R-GoL-EE.git
 cd R-GoL-EE
-bun install
-bun run dev
+pnpm install
+pnpm run dev
 ```
 
 Open **http://localhost:3232** (the port is pinned to avoid clashing with other local projects).
@@ -42,8 +42,8 @@ Open **http://localhost:3232** (the port is pinned to avoid clashing with other 
 Production:
 
 ```bash
-bun run build
-bun run start
+pnpm run build
+pnpm run start
 ```
 
 Deploying to [Vercel](https://vercel.com): import the repository — zero config. Set `NEXT_PUBLIC_SITE_URL` to your final domain so canonical/OG/sitemap URLs match (see `.env.example`). See also [design.md](design.md) for architecture notes.
@@ -68,7 +68,7 @@ On first visit the sim seeds a random soup and auto-starts; later visits open pa
 
 | Concern | Implementation |
 | --- | --- |
-| Stack | Next.js 15 App Router + React 19, TypeScript app shell, Bun scripts |
+| Stack | Next.js 15 App Router + React 19, TypeScript app shell, pnpm scripts |
 | Engine | Vanilla JS canvas engine ported 1:1 into a client component (`components/game-app.jsx`) |
 | Rendering | HTML5 Canvas 2D with cached offscreen background layer and viewport culling |
 | State | Typed arrays — `Uint8Array` grid + `Uint16Array` age buffer |
@@ -100,4 +100,4 @@ See [design.md](design.md) for the complete design reference: neon palette varia
 
 ## Keywords
 
-game of life, conway's game of life, cellular automaton, cellular automata, b/s rules, emergent behavior, javascript game, html5 canvas, next.js, react, bun, vercel, zero dependency, glider, oscillator, spaceship, still life, methuselah, gosper glider gun, simulation, sandbox toy
+game of life, conway's game of life, cellular automaton, cellular automata, b/s rules, emergent behavior, javascript game, html5 canvas, next.js, react, pnpm, vercel, zero dependency, glider, oscillator, spaceship, still life, methuselah, gosper glider gun, simulation, sandbox toy
